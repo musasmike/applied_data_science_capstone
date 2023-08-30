@@ -1,6 +1,5 @@
 # Import required packages
 import pandas as pd
-import numpy as np
 import dash
 import dash_bootstrap_components as dbc
 from dash import dcc
@@ -13,7 +12,7 @@ import plotly.express as px
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 # Load the data
-spacex_df = pd.read_csv('spacex_launch_dash.csv')
+spacex_df = pd.read_csv('data/spacex_launch_dash.csv')
 # Launch Sites drop-down list
 launch_sites_list = list(spacex_df['Launch Site'].unique())
 launch_sites_list.insert(0, 'All Sites')
@@ -57,9 +56,9 @@ app.layout = dbc.Container(children=[
         dbc.Col([
             html.Div('Payload Range (Kg):'),
             html.Div(dcc.RangeSlider(
-                        0, 10000, 1000, value=[0, 10000],
-                            id='payload-slider'
-                        ))
+                0, 10000, 1000, value=[0, 10000],
+                id='payload-slider'
+            ))
         ], width={'size': 7, 'offset': 1})
     ]),
 
@@ -77,6 +76,7 @@ app.layout = dbc.Container(children=[
         ], width={'size': 7})
     ])
 ])
+
 
 # Function decorator to specify function input and output
 @app.callback(Output(component_id='success-pie-chart', component_property='figure'),
@@ -110,7 +110,8 @@ def get_pie_chart(entered_site):
         for site in list(filtered_df['Launch Site'].unique()):
             if entered_site == site:
                 filter_site = filtered_df.loc[filtered_df['Launch Site'] == site]
-                filter_site = round(filter_site['class'].value_counts(normalize=True) * 100, 2).sort_index().reset_index()
+                filter_site = round(filter_site['class'].value_counts(normalize=True) * 100,
+                                    2).sort_index().reset_index()
                 filter_site['class'] = filter_site['class'].replace(0, 'Failed').replace(1, 'Succeed')
                 fig = go.Figure(data=[go.Pie(labels=filter_site['class'],
                                              values=filter_site['proportion'],
@@ -130,10 +131,11 @@ def get_pie_chart(entered_site):
                     ),
                     plot_bgcolor='white',
                     margin=dict(t=100, l=0, r=0, b=0),
-                    #showlegend=False
+                    showlegend=False
                 )
 
         return fig
+
 
 # Function decorator
 @app.callback(Output(component_id='success-payload-scatter-chart', component_property='figure'),
