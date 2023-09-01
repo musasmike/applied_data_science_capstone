@@ -1,5 +1,4 @@
 # applied_data_science_capstone
-Capstone project for the IBM Data Science Professional Certificate
 
 ## Executive Summary
 SpaceY, an emerging rocket launch company, founded by billionaire industrialist Allon Musk, is positioning itself to compete with industry giant SpaceX. This project's core objective is two-fold: firstly, to ascertain the optimal launch pricing strategy, and secondly, to forecast the likelihood of SpaceX reusing its initial launch stage based on historical data gleaned from past SpaceX rocket launches.
