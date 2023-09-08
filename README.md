@@ -1,4 +1,4 @@
-# Applied Data Science Capstone
+# Applied Data Science Capstone Report
 
 ### Table of Contents
 
@@ -34,7 +34,11 @@ For all these models, we utilized the GridSearchCV object to identify the best h
 ### 4.i Exploratory Data Analysis
 * The landing success rate that SpaceX has experienced, amounting to 66.67%, is twice that of its failures (33.33%). This discrepancy could potentially pose challenges for our model construction due to the unbalanced nature of the data. Consequently, additional measures need to be implemented to enhance the quality of the dataset.
 
-![image](visualizations/landing_failure_vs_success_rate.png)
+<center><img src="visualizations/landing_failure_vs_success_rate.png" style="width:50%;height:50%;"></center>
+
+* We observed that as the years have progressed, the number of successes has increased and surpassed the number of failures since 2016, which was larger initially. This may be attributed to the experience and lessons learned from previous launch projects.
+
+<center><img src="visualizations/task_6_success_failure_landings_overtime.png" style="width:50%;height:50%;"></center>
 
 ### 4.ii Dashboard
 
@@ -50,4 +54,3 @@ For all these models, we utilized the GridSearchCV object to identify the best h
 ## 7. Appendix & References
 
 
-![image](https://github.com/musasmike/applied_data_science_capstone/assets/70798790/aa2a244c-bb34-4dc1-9679-b63ebd929a3c)
