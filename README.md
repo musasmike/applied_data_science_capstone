@@ -34,23 +34,72 @@ For all these models, we utilized the GridSearchCV object to identify the best h
 ### 4.i Exploratory Data Analysis
 * The landing success rate that SpaceX has experienced, amounting to 66.67%, is twice that of its failures (33.33%). This discrepancy could potentially pose challenges for our model construction due to the unbalanced nature of the data. Consequently, additional measures need to be implemented to enhance the quality of the dataset.
 
-<center><img src="visualizations/landing_failure_vs_success_rate.png" style="width:50%;height:50%;"></center>
+<img src="visualizations/landing_failure_vs_success_rate.png" style="width:50%;height:50%;">
 
 * We observed that as the years have progressed, the number of successes has increased and surpassed the number of failures since 2016, which was larger initially. This may be attributed to the experience and lessons learned from previous launch projects.
 
-<center><img src="visualizations/task_6_success_failure_landings_overtime.png" style="width:50%;height:50%;"></center>
+<img src="visualizations/task_6_success_failure_landings_overtime.png" style="width:50%;height:50%;">
+
+* We also observe that various launch sites have varying success rates. CCAFS SLC-40 has a success rate of 60%, while KSC LC-39A and WAFB SLC 4E have success rates of 77%.
+
+<img src="visualizations/success_failure_by_launch_site.png" style="width:50%;height:50%;">
+
+* As the number of flights at the CCAFS SLC-40 launch site increases, we notice a decreasing number of failed landings. This trend holds true for the other launch sites as well, where we can observe a consistent reduction in the number of failed landings.
+
+<img src="visualizations/task_1_flight_number_launch_site.png" style="width:50%;height:50%;">
+
+* There isn't much difference in payload mass for the CCAFS SLC-40 launch site. However, we observe that three of the launches with the highest payload were successful.
+* We also observed that there have been no rockets launched with heavy payload masses greater than 10,000 at the VAFB-SLC launch site.
+
+<img src="visualizations/task_2_payloadmass_by_launch_site.png" style="width:50%;height:50%;">
+
+* We observed that most low Earth orbits, such as ISS, VLEO, PO, LEO, and SSO, tended to experience a significant number of successes. However, it's worth noting that most of the company missions were focused on low Earth orbits. In contrast, GTO, a high Earth orbit, had more space missions than GEO. Nevertheless, GTO only achieved a 51.85% landing success rate (see Figure: Landing success rate).
+
+<img src="visualizations/task_3_missions_by_orbit_class.png" style="width:50%;height:50%;">
+<img src="visualizations/task_3_landing_succes_rate_by_orbit.png" style="width:50%;height:50%;">
+
+* You should observe that success in the LEO orbit appears to be related to the number of flights, while in the GTO orbit, there seems to be no apparent relationship between the number of flights and success.
+
+<img src="visualizations/task_4_orbit_flight_number_by_class.png" style="width:50%;height:50%;">
 
 ### 4.ii Dashboard
 
+* The payload range with the highest number of successful launches falls between 0 and 10,000 kg, totaling 24 missions. The range with the highest success rate lies between 3,000 and 4,000 kg, boasting a success rate of 72.73% with a total of 8 successful launches and only 3 failed ones.
+* The payload ranges with the lowest number of successful launches are (6,000 - 7,000), (6,000 - 8,000), and (6,000 - 9,000), all of which have 0 successes and 4 failures, resulting in a 0% success rate for each.
+* The Booster Version Category with the highest success rate is B5, achieving a perfect 100% success rate. However, it's important to note that this category was only used in one mission. Consequently, we excluded it from consideration and focused on the remaining categories. As a result, the highest Booster Version Category with the highest success rate is FT, boasting a 66.67% success rate.
+
+<img src="visualizations/dashboard.png">
+
+* KSC LC-39A has the highest number of successful launches, accounting for 41.2% of the total successful missions launched at this site, where the first stage successfully landed.
+
+<img src="visualizations/total_success_launch_by_sites.png" style="width:50%;height:50%;">
+
+* KSC LC-39A was also- the site with the highest launch success rate of 76.9% versus 23.1% of failed launches.
+
+<img src="visualizations/ksc_lc_39a.png" style="width:50%;height:50%;">
 
 ### 4.iii Machine Learning Results
 
+* Each of the four models exhibited distinct best scores during the tuning process. Surprisingly, they all achieved identical accuracy scores on the test set, which amounted to 0.83. Furthermore, the precision, recall, and F1-score were consistently high at 0.80 (80%), 1.00 (100%), and 0.89 (89%), respectively. These results are indicative of strong performance. Consequently, we recommend any of these models as a suitable choice.
+* These models demonstrated exceptional accuracy in predicting the successful landing of the first stage, achieving 12 correct predictions out of 12, resulting in a perfect recall rate of 100% (1.00). However, the models encountered challenges when predicting unsuccessful landings. Of the predictions made in this regard, three were correct, while three were incorrect, signifying instances where the model predicted an unsuccessful landing, but the first stage landed successfully. This presents a concerning situation for the company, as these incorrect predictions translate into a loss of 64 million dollars, contrary to their anticipated savings.
+
+<img src="visualizations/confusion_matrix.png" style="width:50%;height:50%;">
 
 ## 5. Discussion
 
+All the models utilized in our projects have the potential for further improvement. Here are some suggested enhancements for these models:
+1.	**Reducing False Positives (FP)**: In our specific scenario, it is crucial to minimize the occurrence of False Positives, where the model predicts a successful rocket landing that doesn't happen. Such predictions incur unexpected expenses for the company. Conversely, False Negatives (FN), where the model predicts a failed landing that succeeds, are less critical. In these cases, the company benefits by saving money that they would otherwise lose.
+2.	**Increasing Data Size**: To enhance the model's performance, one should consider augmenting the dataset by collecting more data points. It is essential to balance the distribution of outcomes in the data, as our current dataset appears to be imbalanced, with a 66.67% success rate and a 33.33% failure rate. Balancing the data can help prevent bias and improve the model's ability to generalize effectively.
+
+
 ## 6. Conclusion
 
+In conclusion, our analysis of SpaceX's rocket launch data has provided valuable insights into the factors influencing the success of the first stage landing. SpaceY, the emerging rocket launch company, can benefit greatly from these findings in its quest to compete with industry leader SpaceX.
+Our analysis revealed that the success rate of first stage landings by SpaceX stands at an impressive 66.67%, showcasing the effectiveness of their reusable rocket technology. This success rate has shown a positive trend over the years, indicating that SpaceX has learned from past missions and improved their processes.
+Furthermore, our exploration of different launch sites highlighted variations in success rates, with KSC LC-39A leading the way with a 76.9% success rate. These insights can help SpaceY make informed decisions about launch site selection.
+The machine learning models we employed demonstrated strong predictive capabilities, achieving an accuracy score of 0.83 and an F1-score of 0.89. While these results are promising, we must address the issue of false positives, as incorrect predictions of successful landings can lead to significant financial losses.
+To further enhance our models, we recommend reducing false positives and increasing the size of the dataset to balance the distribution of outcomes. These improvements will not only strengthen the predictive capabilities of our models but also provide SpaceY with more reliable forecasts for first stage landings.
+In summary, SpaceY is well-positioned to compete in the rocket launch industry, armed with data-driven insights and robust machine learning models. As they continue to refine their strategies and technology, SpaceY has the potential to make a significant impact in the space exploration sector, ultimately driving down launch costs and advancing our reach into the cosmos.
 
-## 7. Appendix & References
 
 
